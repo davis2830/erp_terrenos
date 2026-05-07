@@ -1,3 +1,4 @@
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import {
   LayoutDashboard,
   MapPin,
@@ -10,6 +11,7 @@ import {
   LogOut,
   Menu,
 } from "lucide-react";
+import { useAuthStore } from "../../store/authStore";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -28,6 +30,15 @@ const menuItems = [
 ];
 
 export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const logout = useAuthStore((s) => s.logout);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <aside
       className={`bg-slate-900 text-white transition-all duration-300 ${
@@ -44,20 +55,30 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
       </div>
 
       <nav className="flex-1 py-4">
-        {menuItems.map((item) => (
-          <a
-            key={item.path}
-            href={item.path}
-            className="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 transition-colors"
-          >
-            <item.icon size={20} />
-            {isOpen && <span>{item.label}</span>}
-          </a>
-        ))}
+        {menuItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex items-center gap-3 px-4 py-3 transition-colors ${
+                isActive
+                  ? "bg-emerald-600 text-white"
+                  : "hover:bg-slate-800 text-slate-300"
+              }`}
+            >
+              <item.icon size={20} />
+              {isOpen && <span>{item.label}</span>}
+            </Link>
+          );
+        })}
       </nav>
 
       <div className="border-t border-slate-700 p-4">
-        <button className="flex items-center gap-3 w-full hover:bg-slate-800 p-2 rounded transition-colors">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 w-full hover:bg-slate-800 p-2 rounded transition-colors text-slate-300"
+        >
           <LogOut size={20} />
           {isOpen && <span>Cerrar sesión</span>}
         </button>

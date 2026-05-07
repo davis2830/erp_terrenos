@@ -1,5 +1,7 @@
+from django.db.models import Count, Q, Sum
 from rest_framework import generics, parsers, status
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from apps.accounts.permissions import IsAdminOrGerente
 
@@ -78,6 +80,45 @@ class LoteDisponibilidadView(generics.GenericAPIView):
                 "numero": lote.numero,
                 "estado": lote.estado,
                 "disponible": lote.estado == Lote.Estado.DISPONIBLE,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class DashboardStatsView(APIView):
+    """KPIs y estadísticas para el dashboard principal."""
+
+    def get(self, request):
+        estados = Lote.objects.aggregate(
+            total=Count("id"),
+            disponibles=Count("id", filter=Q(estado=Lote.Estado.DISPONIBLE)),
+            reservados=Count("id", filter=Q(estado=Lote.Estado.RESERVADO)),
+            vendidos=Count("id", filter=Q(estado=Lote.Estado.VENDIDO)),
+            valor_total=Sum("precio_base"),
+            valor_vendido=Sum(
+                "precio_base", filter=Q(estado=Lote.Estado.VENDIDO)
+            ),
+            valor_disponible=Sum(
+                "precio_base", filter=Q(estado=Lote.Estado.DISPONIBLE)
+            ),
+        )
+
+        proyectos_count = Proyecto.objects.filter(is_active=True).count()
+
+        return Response(
+            {
+                "lotes": {
+                    "total": estados["total"] or 0,
+                    "disponibles": estados["disponibles"] or 0,
+                    "reservados": estados["reservados"] or 0,
+                    "vendidos": estados["vendidos"] or 0,
+                },
+                "valores": {
+                    "total": float(estados["valor_total"] or 0),
+                    "vendido": float(estados["valor_vendido"] or 0),
+                    "disponible": float(estados["valor_disponible"] or 0),
+                },
+                "proyectos_activos": proyectos_count,
             },
             status=status.HTTP_200_OK,
         )
