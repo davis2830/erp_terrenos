@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clientes - GCtorque ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="fixed top-0 left-0 h-full w-64 bg-brand-800 text-white z-30 flex flex-col">
+    <div class="p-5 border-b border-brand-700">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center"><i class="fas fa-mountain-sun text-brand-600 text-lg"></i></div>
+        <div><h1 class="font-bold text-lg leading-tight">GCtorque</h1><p class="text-brand-300 text-xs">ERP Inmobiliario</p></div>
+      </div>
+    </div>
+    <nav class="flex-1 py-4 overflow-y-auto">
+      <a href="dashboard.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition"><i class="fas fa-chart-pie w-5 text-center"></i> Dashboard</a>
+      <a href="terrenos.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition"><i class="fas fa-map-pin w-5 text-center"></i> Terrenos</a>
+      <a href="mapa.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition"><i class="fas fa-map w-5 text-center"></i> Mapa</a>
+      <a href="clientes.html" class="flex items-center gap-3 px-5 py-3 bg-brand-700/50 text-white border-r-3 border-white"><i class="fas fa-users w-5 text-center"></i> Clientes</a>
+      <a href="finanzas.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition"><i class="fas fa-dollar-sign w-5 text-center"></i> Finanzas</a>
+      <a href="facturacion.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition"><i class="fas fa-file-invoice w-5 text-center"></i> Facturación</a>
+      <a href="reportes.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition"><i class="fas fa-chart-bar w-5 text-center"></i> Reportes</a>
+      <a href="notificaciones.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition"><i class="fas fa-bell w-5 text-center"></i> Notificaciones</a>
+    </nav>
+    <div class="p-4 border-t border-brand-700">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-brand-600 rounded-full flex items-center justify-center text-sm font-bold">AG</div>
+        <div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Admin General</p><p class="text-brand-300 text-xs">Administrador</p></div>
+        <a href="login.html" class="text-brand-300 hover:text-white"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="ml-64">
+    <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
+      <div>
+        <h2 class="text-xl font-bold text-gray-800">CRM - Gestión de Clientes</h2>
+        <p class="text-sm text-gray-500">Directorio, seguimiento y reservas</p>
+      </div>
+      <button class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <i class="fas fa-user-plus"></i> Nuevo Cliente
+      </button>
+    </header>
+
+    <main class="p-6">
+      <!-- Tabs -->
+      <div class="flex items-center gap-1 mb-6 bg-white rounded-lg p-1 shadow-sm border border-gray-100 w-fit">
+        <button class="px-4 py-2 bg-brand-600 text-white rounded-md text-sm font-medium">Clientes</button>
+        <button class="px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-md text-sm font-medium">Reservas Activas</button>
+        <button class="px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-md text-sm font-medium">Seguimientos</button>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="md:col-span-2 relative">
+            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input type="text" placeholder="Buscar por nombre, DPI, NIT o teléfono..." 
+              class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+          </div>
+          <select class="border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-600">
+            <option>Todos los vendedores</option>
+            <option>Roberto Pérez</option>
+            <option>Ana López</option>
+            <option>Mario García</option>
+          </select>
+          <select class="border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-600">
+            <option>Estado de cliente</option>
+            <option>Prospecto</option>
+            <option>Con reserva</option>
+            <option>Comprador activo</option>
+            <option>Completado</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Clients Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+        <!-- Client Card 1 -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">ML</div>
+              <div>
+                <h4 class="font-semibold text-gray-800">María López</h4>
+                <p class="text-xs text-gray-500">Agregada hace 5 días</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 text-xs bg-green-100 text-green-700 rounded-full font-medium">Comprador</span>
+          </div>
+          <dl class="space-y-2 text-sm mb-4">
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-id-card w-4 text-gray-400"></i>
+              <span>DPI: 1234 56789 0101</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-phone w-4 text-gray-400"></i>
+              <span>+502 5555-1234</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-map-pin w-4 text-gray-400"></i>
+              <span>Lote A-12 · Residencial El Encanto</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-user-tie w-4 text-gray-400"></i>
+              <span>Vendedor: Roberto Pérez</span>
+            </div>
+          </dl>
+          <div class="flex items-center gap-2">
+            <a href="#" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg text-sm font-medium text-center transition flex items-center justify-center gap-1.5">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition"><i class="fas fa-eye"></i></button>
+            <button class="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition"><i class="fas fa-edit"></i></button>
+          </div>
+        </div>
+
+        <!-- Client Card 2 -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold">CM</div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Carlos Méndez</h4>
+                <p class="text-xs text-gray-500">Agregado hace 2 días</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 text-xs bg-amber-100 text-amber-700 rounded-full font-medium">Reserva</span>
+          </div>
+          <dl class="space-y-2 text-sm mb-4">
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-id-card w-4 text-gray-400"></i>
+              <span>DPI: 2345 67890 0102</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-phone w-4 text-gray-400"></i>
+              <span>+502 5555-5678</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-map-pin w-4 text-gray-400"></i>
+              <span>Lote B-05 · Villas del Norte</span>
+            </div>
+            <div class="flex items-center gap-2 text-amber-600">
+              <i class="fas fa-clock w-4"></i>
+              <span class="font-medium">Reserva expira en 3 días</span>
+            </div>
+          </dl>
+          <div class="flex items-center gap-2">
+            <a href="#" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg text-sm font-medium text-center transition flex items-center justify-center gap-1.5">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition"><i class="fas fa-eye"></i></button>
+            <button class="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition"><i class="fas fa-edit"></i></button>
+          </div>
+        </div>
+
+        <!-- Client Card 3 -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">JR</div>
+              <div>
+                <h4 class="font-semibold text-gray-800">José Ramírez</h4>
+                <p class="text-xs text-gray-500">Agregado hace 1 semana</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 text-xs bg-blue-100 text-blue-700 rounded-full font-medium">Prospecto</span>
+          </div>
+          <dl class="space-y-2 text-sm mb-4">
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-id-card w-4 text-gray-400"></i>
+              <span>DPI: 3456 78901 0103</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-phone w-4 text-gray-400"></i>
+              <span>+502 5555-9012</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-map-pin w-4 text-gray-400"></i>
+              <span>Interesado en Jardines de Petén</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-user-tie w-4 text-gray-400"></i>
+              <span>Vendedor: Ana López</span>
+            </div>
+          </dl>
+          <div class="flex items-center gap-2">
+            <a href="#" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg text-sm font-medium text-center transition flex items-center justify-center gap-1.5">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition"><i class="fas fa-eye"></i></button>
+            <button class="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition"><i class="fas fa-edit"></i></button>
+          </div>
+        </div>
+
+        <!-- Client Card 4 -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 font-bold">LG</div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Luisa González</h4>
+                <p class="text-xs text-gray-500">Agregada hace 3 semanas</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 text-xs bg-green-100 text-green-700 rounded-full font-medium">Comprador</span>
+          </div>
+          <dl class="space-y-2 text-sm mb-4">
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-id-card w-4 text-gray-400"></i>
+              <span>DPI: 4567 89012 0104</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-phone w-4 text-gray-400"></i>
+              <span>+502 5555-3456</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600">
+              <i class="fas fa-map-pin w-4 text-gray-400"></i>
+              <span>Lote C-08 · Residencial El Encanto</span>
+            </div>
+            <div class="flex items-center gap-2 text-red-500">
+              <i class="fas fa-exclamation-circle w-4"></i>
+              <span class="font-medium">2 cuotas en mora</span>
+            </div>
+          </dl>
+          <div class="flex items-center gap-2">
+            <a href="#" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg text-sm font-medium text-center transition flex items-center justify-center gap-1.5">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition"><i class="fas fa-eye"></i></button>
+            <button class="p-2 border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50 transition"><i class="fas fa-edit"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reservations Section -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-gray-800">Reservas Activas</h3>
+          <span class="text-sm text-gray-500">3 reservas activas</span>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center gap-4 p-3 border border-amber-200 bg-amber-50 rounded-lg">
+            <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white"><i class="fas fa-clock"></i></div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-800">Carlos Méndez → Lote B-05</p>
+              <p class="text-xs text-gray-500">Villas del Norte · Reservado: 04/May/2026</p>
+            </div>
+            <div class="text-right">
+              <p class="text-sm font-bold text-amber-600">Expira en 3 días</p>
+              <p class="text-xs text-gray-500">07/May/2026</p>
+            </div>
+            <div class="flex gap-1">
+              <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Concretar venta"><i class="fas fa-check-circle"></i></button>
+              <button class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Cancelar reserva"><i class="fas fa-times-circle"></i></button>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-3 border border-red-200 bg-red-50 rounded-lg">
+            <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white"><i class="fas fa-exclamation"></i></div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-800">Pedro Castillo → Lote A-08</p>
+              <p class="text-xs text-gray-500">Residencial El Encanto · Reservado: 01/May/2026</p>
+            </div>
+            <div class="text-right">
+              <p class="text-sm font-bold text-red-600">Expiró hoy</p>
+              <p class="text-xs text-gray-500">07/May/2026</p>
+            </div>
+            <div class="flex gap-1">
+              <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Extender"><i class="fas fa-redo"></i></button>
+              <button class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Liberar lote"><i class="fas fa-unlock"></i></button>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-3 border border-green-200 bg-green-50 rounded-lg">
+            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white"><i class="fas fa-hourglass-half"></i></div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-800">Ana Morales → Lote D-02</p>
+              <p class="text-xs text-gray-500">Residencial El Encanto · Reservado: 06/May/2026</p>
+            </div>
+            <div class="text-right">
+              <p class="text-sm font-bold text-green-600">12 días restantes</p>
+              <p class="text-xs text-gray-500">19/May/2026</p>
+            </div>
+            <div class="flex gap-1">
+              <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Concretar venta"><i class="fas fa-check-circle"></i></button>
+              <button class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Cancelar reserva"><i class="fas fa-times-circle"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

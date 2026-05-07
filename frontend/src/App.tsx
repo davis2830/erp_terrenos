@@ -7,19 +7,20 @@ import ClientesPage from "./pages/clientes/ClientesPage";
 import FinanzasPage from "./pages/finanzas/FinanzasPage";
 import FacturacionPage from "./pages/facturacion/FacturacionPage";
 import ReportesPage from "./pages/reportes/ReportesPage";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/terrenos" element={<TerrenosPage />} />
-        <Route path="/mapa" element={<MapaPage />} />
-        <Route path="/clientes" element={<ClientesPage />} />
-        <Route path="/finanzas" element={<FinanzasPage />} />
-        <Route path="/facturacion" element={<FacturacionPage />} />
-        <Route path="/reportes" element={<ReportesPage />} />
+        <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+        <Route path="/terrenos" element={<ProtectedRoute><TerrenosPage /></ProtectedRoute>} />
+        <Route path="/mapa" element={<ProtectedRoute><MapaPage /></ProtectedRoute>} />
+        <Route path="/clientes" element={<ProtectedRoute><ClientesPage /></ProtectedRoute>} />
+        <Route path="/finanzas" element={<ProtectedRoute><FinanzasPage /></ProtectedRoute>} />
+        <Route path="/facturacion" element={<ProtectedRoute><FacturacionPage /></ProtectedRoute>} />
+        <Route path="/reportes" element={<ProtectedRoute><ReportesPage /></ProtectedRoute>} />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </Router>

@@ -5,14 +5,20 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .permissions import IsAdminOrGerente
-from .serializers import ProfileSerializer, UserCreateSerializer, UserSerializer
+from .serializers import (
+    CustomTokenObtainPairSerializer,
+    ProfileSerializer,
+    UserCreateSerializer,
+    UserSerializer,
+)
 
 User = get_user_model()
 
 
 class LoginView(TokenObtainPairView):
-    """Endpoint de login. Retorna tokens JWT."""
+    """Endpoint de login. Retorna tokens JWT + datos del usuario."""
 
+    serializer_class = CustomTokenObtainPairSerializer
     permission_classes = [permissions.AllowAny]
 
 

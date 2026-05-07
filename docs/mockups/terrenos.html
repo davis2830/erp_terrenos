@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terrenos - GCtorque ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="fixed top-0 left-0 h-full w-64 bg-brand-800 text-white z-30 flex flex-col">
+    <div class="p-5 border-b border-brand-700">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+          <i class="fas fa-mountain-sun text-brand-600 text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight">GCtorque</h1>
+          <p class="text-brand-300 text-xs">ERP Inmobiliario</p>
+        </div>
+      </div>
+    </div>
+    <nav class="flex-1 py-4 overflow-y-auto">
+      <a href="dashboard.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition">
+        <i class="fas fa-chart-pie w-5 text-center"></i> Dashboard
+      </a>
+      <a href="terrenos.html" class="flex items-center gap-3 px-5 py-3 bg-brand-700/50 text-white border-r-3 border-white">
+        <i class="fas fa-map-pin w-5 text-center"></i> Terrenos
+      </a>
+      <a href="mapa.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition">
+        <i class="fas fa-map w-5 text-center"></i> Mapa
+      </a>
+      <a href="clientes.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition">
+        <i class="fas fa-users w-5 text-center"></i> Clientes
+      </a>
+      <a href="finanzas.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition">
+        <i class="fas fa-dollar-sign w-5 text-center"></i> Finanzas
+      </a>
+      <a href="facturacion.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition">
+        <i class="fas fa-file-invoice w-5 text-center"></i> Facturación
+      </a>
+      <a href="reportes.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition">
+        <i class="fas fa-chart-bar w-5 text-center"></i> Reportes
+      </a>
+      <a href="notificaciones.html" class="flex items-center gap-3 px-5 py-3 text-brand-200 hover:bg-brand-700/30 hover:text-white transition">
+        <i class="fas fa-bell w-5 text-center"></i> Notificaciones
+      </a>
+    </nav>
+    <div class="p-4 border-t border-brand-700">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-brand-600 rounded-full flex items-center justify-center text-sm font-bold">AG</div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium truncate">Admin General</p>
+          <p class="text-brand-300 text-xs">Administrador</p>
+        </div>
+        <a href="login.html" class="text-brand-300 hover:text-white"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="ml-64">
+    <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
+      <div>
+        <h2 class="text-xl font-bold text-gray-800">Inventario de Terrenos</h2>
+        <p class="text-sm text-gray-500">Gestión de proyectos, lotes y disponibilidad</p>
+      </div>
+      <button class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <i class="fas fa-plus"></i> Nuevo Lote
+      </button>
+    </header>
+
+    <main class="p-6">
+      <!-- Filters -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div class="md:col-span-2">
+            <div class="relative">
+              <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+              <input type="text" placeholder="Buscar por número de lote, finca, folio..." 
+                class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none">
+            </div>
+          </div>
+          <select class="border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-600 focus:ring-2 focus:ring-brand-500 outline-none">
+            <option>Todos los Proyectos</option>
+            <option>Residencial El Encanto</option>
+            <option>Villas del Norte</option>
+            <option>Jardines de Petén</option>
+          </select>
+          <select class="border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-600 focus:ring-2 focus:ring-brand-500 outline-none">
+            <option>Todos los Estados</option>
+            <option>Disponible</option>
+            <option>Reservado</option>
+            <option>Vendido</option>
+          </select>
+          <select class="border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-600 focus:ring-2 focus:ring-brand-500 outline-none">
+            <option>Ordenar por Precio</option>
+            <option>Menor a Mayor</option>
+            <option>Mayor a Menor</option>
+            <option>Más recientes</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Stats mini -->
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="bg-green-50 border border-green-200 rounded-lg px-4 py-3 flex items-center gap-3">
+          <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center"><i class="fas fa-check text-white text-xs"></i></div>
+          <div>
+            <p class="text-lg font-bold text-green-700">48</p>
+            <p class="text-xs text-green-600">Disponibles</p>
+          </div>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 flex items-center gap-3">
+          <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center"><i class="fas fa-clock text-white text-xs"></i></div>
+          <div>
+            <p class="text-lg font-bold text-amber-700">24</p>
+            <p class="text-xs text-amber-600">Reservados</p>
+          </div>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-lg px-4 py-3 flex items-center gap-3">
+          <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center"><i class="fas fa-ban text-white text-xs"></i></div>
+          <div>
+            <p class="text-lg font-bold text-red-700">48</p>
+            <p class="text-xs text-red-600">Vendidos</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-gray-50 border-b border-gray-100">
+                <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Lote</th>
+                <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Proyecto</th>
+                <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Medidas</th>
+                <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Precio</th>
+                <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Estado</th>
+                <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Finca</th>
+                <th class="text-center px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr class="hover:bg-gray-50 transition">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400"><i class="fas fa-image"></i></div>
+                    <div>
+                      <p class="font-medium text-gray-800">A-01</p>
+                      <p class="text-xs text-gray-500">Manzana A</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">Residencial El Encanto</td>
+                <td class="px-5 py-4">
+                  <p class="text-sm text-gray-800">10m × 25m</p>
+                  <p class="text-xs text-gray-500">250 m²</p>
+                </td>
+                <td class="px-5 py-4 text-sm font-semibold text-gray-800">Q 185,000</td>
+                <td class="px-5 py-4">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Disponible
+                  </span>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">F-1234</td>
+                <td class="px-5 py-4 text-center">
+                  <div class="flex items-center justify-center gap-1">
+                    <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Ver detalle"><i class="fas fa-eye text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-brand-600 hover:bg-green-50 rounded-lg transition" title="Editar"><i class="fas fa-edit text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition" title="Ubicación"><i class="fas fa-map-marker-alt text-sm"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50 transition">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400"><i class="fas fa-image"></i></div>
+                    <div>
+                      <p class="font-medium text-gray-800">A-02</p>
+                      <p class="text-xs text-gray-500">Manzana A</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">Residencial El Encanto</td>
+                <td class="px-5 py-4">
+                  <p class="text-sm text-gray-800">12m × 30m</p>
+                  <p class="text-xs text-gray-500">360 m²</p>
+                </td>
+                <td class="px-5 py-4 text-sm font-semibold text-gray-800">Q 220,000</td>
+                <td class="px-5 py-4">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
+                    <span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span> Reservado
+                  </span>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">F-1235</td>
+                <td class="px-5 py-4 text-center">
+                  <div class="flex items-center justify-center gap-1">
+                    <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"><i class="fas fa-eye text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-brand-600 hover:bg-green-50 rounded-lg transition"><i class="fas fa-edit text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"><i class="fas fa-map-marker-alt text-sm"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50 transition">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400"><i class="fas fa-image"></i></div>
+                    <div>
+                      <p class="font-medium text-gray-800">A-03</p>
+                      <p class="text-xs text-gray-500">Manzana A</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">Residencial El Encanto</td>
+                <td class="px-5 py-4">
+                  <p class="text-sm text-gray-800">10m × 20m</p>
+                  <p class="text-xs text-gray-500">200 m²</p>
+                </td>
+                <td class="px-5 py-4 text-sm font-semibold text-gray-800">Q 165,000</td>
+                <td class="px-5 py-4">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Vendido
+                  </span>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">F-1236</td>
+                <td class="px-5 py-4 text-center">
+                  <div class="flex items-center justify-center gap-1">
+                    <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"><i class="fas fa-eye text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-brand-600 hover:bg-green-50 rounded-lg transition"><i class="fas fa-edit text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"><i class="fas fa-map-marker-alt text-sm"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50 transition">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400"><i class="fas fa-image"></i></div>
+                    <div>
+                      <p class="font-medium text-gray-800">B-01</p>
+                      <p class="text-xs text-gray-500">Manzana B</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">Villas del Norte</td>
+                <td class="px-5 py-4">
+                  <p class="text-sm text-gray-800">15m × 30m</p>
+                  <p class="text-xs text-gray-500">450 m²</p>
+                </td>
+                <td class="px-5 py-4 text-sm font-semibold text-gray-800">Q 310,000</td>
+                <td class="px-5 py-4">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Disponible
+                  </span>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">F-2001</td>
+                <td class="px-5 py-4 text-center">
+                  <div class="flex items-center justify-center gap-1">
+                    <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"><i class="fas fa-eye text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-brand-600 hover:bg-green-50 rounded-lg transition"><i class="fas fa-edit text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"><i class="fas fa-map-marker-alt text-sm"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-gray-50 transition">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400"><i class="fas fa-image"></i></div>
+                    <div>
+                      <p class="font-medium text-gray-800">B-05</p>
+                      <p class="text-xs text-gray-500">Manzana B</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">Villas del Norte</td>
+                <td class="px-5 py-4">
+                  <p class="text-sm text-gray-800">12m × 25m</p>
+                  <p class="text-xs text-gray-500">300 m²</p>
+                </td>
+                <td class="px-5 py-4 text-sm font-semibold text-gray-800">Q 245,000</td>
+                <td class="px-5 py-4">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Disponible
+                  </span>
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600">F-2005</td>
+                <td class="px-5 py-4 text-center">
+                  <div class="flex items-center justify-center gap-1">
+                    <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"><i class="fas fa-eye text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-brand-600 hover:bg-green-50 rounded-lg transition"><i class="fas fa-edit text-sm"></i></button>
+                    <button class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"><i class="fas fa-map-marker-alt text-sm"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <div class="flex items-center justify-between px-5 py-4 border-t border-gray-100">
+          <p class="text-sm text-gray-500">Mostrando 1-5 de 120 lotes</p>
+          <div class="flex items-center gap-1">
+            <button class="px-3 py-1.5 text-sm text-gray-400 border border-gray-200 rounded-lg" disabled>Anterior</button>
+            <button class="px-3 py-1.5 text-sm bg-brand-600 text-white rounded-lg">1</button>
+            <button class="px-3 py-1.5 text-sm text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50">2</button>
+            <button class="px-3 py-1.5 text-sm text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50">3</button>
+            <span class="px-2 text-gray-400">...</span>
+            <button class="px-3 py-1.5 text-sm text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50">24</button>
+            <button class="px-3 py-1.5 text-sm text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50">Siguiente</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal: Detalle de Lote (overlay) -->
+  <div class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" style="display: none;" id="modal-lote">
+    <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-bold text-gray-800">Detalle del Lote A-01</h3>
+        <button class="p-2 text-gray-400 hover:text-gray-600 rounded-lg"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="p-6">
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">Información General</h4>
+            <dl class="space-y-2">
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Proyecto:</dt><dd class="text-sm font-medium">Residencial El Encanto</dd></div>
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Manzana:</dt><dd class="text-sm font-medium">A</dd></div>
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Número:</dt><dd class="text-sm font-medium">01</dd></div>
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Estado:</dt><dd><span class="px-2 py-0.5 text-xs bg-green-100 text-green-700 rounded-full">Disponible</span></dd></div>
+            </dl>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">Medidas y Registro</h4>
+            <dl class="space-y-2">
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Frente:</dt><dd class="text-sm font-medium">10 m</dd></div>
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Fondo:</dt><dd class="text-sm font-medium">25 m</dd></div>
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Área:</dt><dd class="text-sm font-medium">250 m²</dd></div>
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Finca:</dt><dd class="text-sm font-medium">F-1234</dd></div>
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Folio:</dt><dd class="text-sm font-medium">456</dd></div>
+              <div class="flex justify-between"><dt class="text-sm text-gray-500">Libro:</dt><dd class="text-sm font-medium">78</dd></div>
+            </dl>
+          </div>
+        </div>
+        <div class="mt-6">
+          <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">Fotografías</h4>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="h-24 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400"><i class="fas fa-image text-2xl"></i></div>
+            <div class="h-24 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400"><i class="fas fa-image text-2xl"></i></div>
+            <div class="h-24 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 relative">
+              <i class="fas fa-plus text-2xl"></i>
+              <span class="absolute bottom-1 text-xs">Agregar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

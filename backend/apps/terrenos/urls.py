@@ -11,4 +11,5 @@ urlpatterns = [
     path("lotes/<int:pk>/", views.LoteDetailView.as_view(), name="lote_detail"),
     path("lotes/<int:lote_pk>/fotografias/", views.FotografiaLoteUploadView.as_view(), name="lote_foto_upload"),
     path("lotes/<int:pk>/disponibilidad/", views.LoteDisponibilidadView.as_view(), name="lote_disponibilidad"),
+    path("dashboard/stats/", views.DashboardStatsView.as_view(), name="dashboard_stats"),
 ]
