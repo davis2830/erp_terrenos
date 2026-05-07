@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - GCtorque ERP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-brand-800 via-brand-700 to-brand-900 flex items-center justify-center p-4">
+
+  <!-- Login Card -->
+  <div class="w-full max-w-md">
+    <!-- Logo -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-lg mb-4">
+        <i class="fas fa-mountain-sun text-brand-600 text-3xl"></i>
+      </div>
+      <h1 class="text-3xl font-bold text-white">GCtorque</h1>
+      <p class="text-brand-200 mt-1">Sistema Inmobiliario de Ventas</p>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white rounded-2xl shadow-2xl p-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-1">Iniciar Sesión</h2>
+      <p class="text-gray-500 mb-6 text-sm">Ingrese sus credenciales para acceder al sistema</p>
+
+      <form>
+        <!-- Email -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Correo Electrónico</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <input type="email" placeholder="usuario@gctorque.com" 
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Contraseña</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+              <i class="fas fa-lock"></i>
+            </span>
+            <input type="password" placeholder="••••••••" 
+              class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Remember & Forgot -->
+        <div class="flex items-center justify-between mb-6">
+          <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+            <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500">
+            Recordarme
+          </label>
+          <a href="#" class="text-sm text-brand-600 hover:text-brand-700 font-medium">¿Olvidó su contraseña?</a>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" 
+          class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 shadow-lg shadow-brand-600/30">
+          Iniciar Sesión
+        </button>
+      </form>
+
+      <!-- Divider -->
+      <div class="mt-6 pt-6 border-t border-gray-100">
+        <p class="text-center text-xs text-gray-400">
+          Sistema exclusivo para personal autorizado de GCtorque
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <p class="text-center text-brand-200 text-xs mt-6">
+      © 2026 GCtorque · Petén, Guatemala
+    </p>
+  </div>
+
+</body>
+</html>
